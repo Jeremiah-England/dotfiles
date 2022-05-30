@@ -1,0 +1,22 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+PS1='[\u@\h \W]\$ '
+
+PATH=~/.local/bin:$PATH
+PATH=~/gitlab/vs/raillinks-infra/tools/unix-scripts/scripts:$PATH
+source ~/.bash_aliases
+
+export PRINTER=Brother_HL_L2390DW
+
+# This should be moved to a secret place probably.
+source ~/.gitlab-secrets
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+. "$HOME/.cargo/env"
