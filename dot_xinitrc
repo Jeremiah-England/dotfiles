@@ -1,0 +1,2 @@
+# https://unix.stackexchange.com/questions/616290/how-to-swap-escape-and-caps-lock-for-tty-and-x11
+setxkbmap -option caps:swapescape
