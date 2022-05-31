@@ -19,6 +19,7 @@ Plug 'folke/zen-mode.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'github/copilot.vim'
+Plug 'shumphrey/fugitive-gitlab.vim'
 call plug#end()
 
 let g:python3_host_prog = '/path/to/python3'
@@ -198,3 +199,6 @@ set shiftwidth=4
 set expandtab
 
 let g:copilot_enabled = v:false
+
+" https://github.com/shumphrey/fugitive-gitlab.vim
+let g:fugitive_gitlab_domains = ['https://gitlab.visiostack.com']
