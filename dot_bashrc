@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
+PS1='($?) $(tput setaf 5)\u$(tput sgr0):$(tput setaf 3)\w$(tput sgr0)\$ '
 
 PATH=~/.local/bin:$PATH
 PATH=~/gitlab/vs/raillinks-infra/tools/unix-scripts/scripts:$PATH
