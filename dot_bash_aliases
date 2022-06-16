@@ -3,6 +3,7 @@ alias grep='grep --color'
 alias diff="diff --color"
 alias copypwd="pwd | xclip -selection clipboard"
 alias pyenv="source venv/bin/activate"
+alias starti3="startx usr/bin/i3"
 
 # Copied from ubuntu .bashrc
 # alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
