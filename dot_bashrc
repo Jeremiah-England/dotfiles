@@ -9,6 +9,8 @@ PS1='($?) $(tput setaf 5)\u$(tput sgr0):$(tput setaf 3)\w$(tput sgr0)\$ '
 
 PATH=~/.local/bin:$PATH
 PATH=~/gitlab/vs/raillinks-infra/tools/unix-scripts/scripts:$PATH
+. "$HOME/.cargo/env"
+
 source ~/.bash_aliases
 
 export PRINTER=Brother_HL_L2390DW
@@ -19,4 +21,5 @@ source ~/.gitlab-secrets
 export EDITOR=nvim
 export VISUAL=nvim
 
-. "$HOME/.cargo/env"
+# See https://github.com/ajeetdsouza/zoxide#step-2-add-zoxide-to-your-shell
+eval "$(zoxide init bash)"
