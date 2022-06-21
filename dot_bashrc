@@ -15,7 +15,6 @@ source ~/.bash_aliases
 
 export PRINTER=Brother_HL_L2390DW
 
-# This should be moved to a secret place probably.
 source ~/.gitlab-secrets
 
 export EDITOR=nvim
