@@ -15,6 +15,7 @@ Plug 'danymat/neogen'
 " Plug 'tpope/vim-sleuth'  " See https://github.com/tpope/vim-sleuth/issues/6
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'folke/zen-mode.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
