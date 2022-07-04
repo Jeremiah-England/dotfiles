@@ -1,0 +1,14 @@
+# Copied from https://github.com/helix-editor/helix/issues/2293#issuecomment-1110730331
+[[language]]
+
+name = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = ["py"]
+shebangs = ["python"]
+roots = ["pyproject.toml", "setup.py", "Poetry.lock"]
+comment-token = "#"
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+auto-format = false
+indent = { tab-width = 4, unit = "    " }
+config = {}
