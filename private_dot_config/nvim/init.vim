@@ -21,6 +21,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'github/copilot.vim'
 Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'alfredodeza/pytest.vim'
 call plug#end()
 
 let g:python3_host_prog = '/path/to/python3'
