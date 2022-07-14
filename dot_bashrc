@@ -8,7 +8,8 @@
 PS1='($?) $(tput setaf 5)\u$(tput sgr0):$(tput setaf 3)\w$(tput sgr0)\$ '
 
 PATH=~/.local/bin:$PATH
-PATH=~/gitlab/vs/raillinks-infra/tools/unix-scripts/scripts:$PATH
+PATH=~/Documents/github/Jeremiah-England/exercism-scripts/scripts:$PATH
+# PATH=~/gitlab/vs/raillinks-infra/tools/unix-scripts/scripts:$PATH
 . "$HOME/.cargo/env"
 
 source ~/.bash_aliases
@@ -16,6 +17,7 @@ source ~/.bash_aliases
 export PRINTER=Brother_HL_L2390DW
 
 source ~/.gitlab-secrets
+source ~/gitlab/vs/raillinks-infra/tools/unix-scripts/rc-files/vs-rc
 
 export EDITOR=nvim
 export VISUAL=nvim
