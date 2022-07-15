@@ -11,14 +11,21 @@ if status is-interactive
 
     set -x PRINTER Brother_HL_L2390DW
 
-    source ~/.gitlab-secrets.fish
-    source ~/gitlab/vs/raillinks-infra/tools/unix-scripts/rc-files/vs-rc.fish
+    if test -e ~/.gitlab-secrets.fish
+        source ~/.gitlab-secrets.fish
+    end
+
+    if test -e ~/gitlab/vs/raillinks-infra/tools/unix-scripts/rc-files/vs-rc.fish
+        source ~/gitlab/vs/raillinks-infra/tools/unix-scripts/rc-files/vs-rc.fish
+    end
 
     set -x EDITOR nvim
     set -x VISUAL nvim
 
     # See https://github.com/ajeetdsouza/zoxide#step-2-add-zoxide-to-your-shell
-    zoxide init fish | source
+    if command -s zoxide
+        zoxide init fish | source
+    end
 
     fish_vi_key_bindings
 
