@@ -34,4 +34,6 @@ if status is-interactive
 
     abbr -a fic fish_rc
     abbr -a gds git diff --staged
+    abbr -a gf git fetch
+    abbr -a gap git add . -p
 end
