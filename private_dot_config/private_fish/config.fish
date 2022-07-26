@@ -23,7 +23,7 @@ if status is-interactive
     set -x VISUAL nvim
 
     # See https://github.com/ajeetdsouza/zoxide#step-2-add-zoxide-to-your-shell
-    if command -s zoxide
+    if command -s zoxide > /dev/null
         zoxide init fish | source
     end
 
