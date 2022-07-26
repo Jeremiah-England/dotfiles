@@ -5,7 +5,7 @@ if status is-interactive
 
     set -x PATH ~/.local/bin $PATH
     set -x PATH ~/Documents/github/Jeremiah-England/exercism-scripts/scripts $PATH
-    set -x PATH "$HOME/.cargo/env" $PATH
+    set -x PATH "$HOME/.cargo/bin" $PATH
 
     # source ~/.bash_aliases
 
