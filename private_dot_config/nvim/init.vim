@@ -23,6 +23,10 @@ Plug 'github/copilot.vim'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'alfredodeza/pytest.vim'
 Plug 'junegunn/vader.vim'
+" Plug 'sakhnik/nvim-gdb'
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'rcarriga/nvim-dap-ui'
 call plug#end()
 
 let g:python3_host_prog = '/path/to/python3'
@@ -207,3 +211,20 @@ let g:copilot_enabled = v:false
 
 " https://github.com/shumphrey/fugitive-gitlab.vim
 let g:fugitive_gitlab_domains = ['https://gitlab.visiostack.com']
+
+" DAP Configurations
+lua <<EOF
+require('dap-python').test_runner = "pytest"
+require('dap-python').setup()
+require('dapui').setup()
+EOF
+
+nnoremap <silent> <Leader>dc <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <Leader>dn <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <Leader>ds <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <Leader>du <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> <Leader>db <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <Leader>dB <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
