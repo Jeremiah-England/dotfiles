@@ -3,6 +3,7 @@
 
 call plug#begin()
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'hrsh7th/nvim-compe'
@@ -27,6 +28,13 @@ Plug 'junegunn/vader.vim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'https://gitlab.com/HiPhish/info.vim.git'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'chentoast/marks.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+Plug 'ttibsi/pre-commit.nvim'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 let g:python3_host_prog = '/path/to/python3'
@@ -228,3 +236,170 @@ nnoremap <silent> <Leader>dB <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('
 nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
 nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+
+
+" Keymappings info.vim
+" See https://stackoverflow.com/a/20105502/9849440
+autocmd FileType info nnoremap <buffer> in :InfoNext<CR>
+autocmd FileType info nnoremap <buffer> ip :InfoPrev<CR>
+autocmd FileType info nnoremap <buffer> iu :InfoUp<CR>
+autocmd FileType info nnoremap <buffer> <Enter> :Follow<CR>
+autocmd FileType info nnoremap <buffer> ig :GotoNode
+autocmd FileType info nnoremap <buffer> im :Menu
+
+
+" Open the python documentation for a module.
+nnoremap <silent> <Leader>op <Cmd>!open "https://docs.python.org/3/library/<cword>.html"<CR>
+
+" Open this "rc" file quickly.
+nnoremap <silent> <Leader>rc <Cmd>tabe $MYVIMRC<CR>
+
+" Open the termianl quickly in a split window below
+nnoremap <silent> <Leader>t <Cmd>split <CR><C-w>j<Cmd>term<CR>a
+
+autocmd FileType markdown set spell
+
+
+
+iabbrev docs documentation
+iabbrev Docs Documentation
+iabbrev PTO Paid Time Off
+iabbrev Jan January
+iabbrev Feb February
+iabbrev powerpoint PowerPoint
+iabbrev Gitlab GitLab
+iabbrev MRs merge requests
+iabbrev MR merge request
+
+
+lua << EOF
+-- https://github.com/chentoast/marks.nvim#setup
+-- require'marks'.setup {
+--   -- whether to map keybinds or not. default true
+--   default_mappings = true,
+--   -- which builtin marks to show. default {}
+--   builtin_marks = { ".", "<", ">", "^" },
+--   -- whether movements cycle back to the beginning/end of buffer. default true
+--   cyclic = true,
+--   -- whether the shada file is updated after modifying uppercase marks. default false
+--   force_write_shada = false,
+--   -- how often (in ms) to redraw signs/recompute mark positions. 
+--   -- higher values will have better performance but may cause visual lag, 
+--   -- while lower values may cause performance penalties. default 150.
+--   refresh_interval = 250,
+--   -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+--   -- marks, and bookmarks.
+--   -- can be either a table with all/none of the keys, or a single number, in which case
+--   -- the priority applies to all marks.
+--   -- default 10.
+--   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+--   -- disables mark tracking for specific filetypes. default {}
+--   excluded_filetypes = {},
+--   -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+--   -- sign/virttext. Bookmarks can be used to group together positions and quickly move
+--   -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+--   -- default virt_text is "".
+--   bookmark_0 = {
+--     sign = "⚑",
+--     virt_text = "hello world",
+--     -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+--     -- defaults to false.
+--     annotate = false,
+--   },
+--   mappings = {}
+-- }
+EOF
+
+lua << EOF
+-- https://github.com/kyazdani42/nvim-tree.lua#setup
+-- empty setup using defaults
+require("nvim-tree").setup()
+EOF
+
+" B for "Browse"
+nnoremap <silent> <Leader>b <Cmd>NvimTreeToggle<CR>
+
+" SnipRun config. See https://github.com/michaelb/sniprun/blob/master/README.md#configuration
+lua << EOF
+require("sniprun").setup({
+  selected_interpreters = {'Python3_original'},     --# use those instead of the default for the current filetype
+  repl_enable = {'Python3_original'},  --# enable REPL-like behavior for the given interpreters
+  repl_disable = {},              --# disable REPL-like behavior for the given interpreters
+
+  interpreter_options = {         --# interpreter-specific options, see docs / :SnipInfo <name>
+
+    --# use the interpreter name as key
+    GFM_original = {
+      use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
+                                                --# available for every interpreter
+    },
+    Python3_original = {
+        error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
+                                        --# the hint is available for every interpreter
+                                        --# but may not be always respected
+    }
+  },      
+
+  --# you can combo different display modes as desired
+  display = {
+    -- "Classic",                    --# display results in the command-line  area
+    -- "VirtualTextOk",              --# display ok results as virtual text (multiline is shortened)
+
+    -- "VirtualTextErr",          --# display error results as virtual text
+    -- "TempFloatingWindow",      --# display results in a floating window
+    -- "LongTempFloatingWindow",  --# same as above, but only long results. To use with VirtualText__
+    -- "Terminal",                --# display results in a vertical split
+    "TerminalWithCode",        --# display results and code history in a vertical split
+    -- "NvimNotify",              --# display with the nvim-notify plugin
+    -- "Api"                      --# return output to a programming interface
+  },
+
+  display_options = {
+    terminal_width = 45,       --# change the terminal display option width
+    notification_timeout = 5   --# timeout for nvim_notify output
+  },
+
+  --# You can use the same keys to customize whether a sniprun producing
+  --# no output should display nothing or '(no output)'
+  show_no_output = {
+    "Classic",
+    "TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
+  },
+
+  --# customize highlight groups (setting this overrides colorscheme)
+  snipruncolors = {
+    SniprunVirtualTextOk   =  {bg="#66eeff",fg="#000000",ctermbg="Cyan",cterfg="Black"},
+    SniprunFloatingWinOk   =  {fg="#66eeff",ctermfg="Cyan"},
+    SniprunVirtualTextErr  =  {bg="#881515",fg="#000000",ctermbg="DarkRed",cterfg="Black"},
+    SniprunFloatingWinErr  =  {fg="#881515",ctermfg="DarkRed"},
+  },
+
+  --# miscellaneous compatibility/adjustement settings
+  inline_messages = 0,             --# inline_message (0/1) is a one-line way to display messages
+				   --# to workaround sniprun not being able to display anything
+
+  borders = 'single',              --# display borders around floating windows
+                                   --# possible values are 'none', 'single', 'double', or 'shadow'
+  live_mode_toggle='off'       --# live mode toggle, see Usage - Running for more info   
+})
+EOF
+
+" Insert a date at the end of the current line.
+nnoremap <silent> <Leader>di <Cmd>r! date -I<CR>i<BS><Space><ESC>E
+
+" From the lspsaga README on github
+lua << EOF
+local action = require("lspsaga.codeaction")
+
+vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true })
+EOF
+
+vnoremap <Leader>sr <ESC><Cmd>'<,'>SnipRun<CR>
+nnoremap <Leader>sr <ESC><Cmd>SnipRun<CR>
+
+" https://github.com/glacambre/firenvim/#building-a-firenvim-specific-config
+if exists('g:started_by_firenvim')
+  set spell
+  set filetype=markdown
+endif
