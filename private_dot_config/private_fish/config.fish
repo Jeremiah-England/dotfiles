@@ -6,6 +6,8 @@ if status is-interactive
     set -x PATH ~/.local/bin $PATH
     set -x PATH ~/Documents/github/Jeremiah-England/exercism-scripts/scripts $PATH
     set -x PATH "$HOME/.cargo/bin" $PATH
+    set -x PATH "$HOME/.screenlayout" $PATH
+    set -x PATH "$HOME/scripts" $PATH
 
     # source ~/.bash_aliases
 
@@ -32,9 +34,17 @@ if status is-interactive
     # From https://wiki.archlinux.org/title/Node.js
     set -x npm_config_prefix "$HOME/.local"
 
-    abbr -a fic fish_rc
+    abbr -a rc fish_rc
     abbr -a gds git diff --staged
     abbr -a gf git fetch
     abbr -a gm git merge
     abbr -a gap git add . -p
+    abbr -a gsw git switch
+    abbr -a gsm git switch master
+    abbr -a gpo git-push-origin
+    abbr -a gln git log -n
+    abbr -a gl git log
+    abbr -a grm git rebase origin/master --interactive
+    abbr -a gpf git push --force
+    abbr -a i3config nvim ~/.config/i3/config
 end
